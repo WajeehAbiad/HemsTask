@@ -1,0 +1,31 @@
+﻿@model IEnumerable<HemsTask.Model.Models.ProductCategory>
+
+@{
+	ViewData["Title"] = "index";
+}
+
+<h1>Product categories</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+	@foreach (var item in Model)
+	{
+		<div class="col-md-4 mb-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">@item.ProductCategoryCode</h5>
+					<h6 class="card-subtitle text-muted mb-2">@item.CategoryName (@item.Status)</h6>
+					<p class="card-text">@item.CategoryDescription</p>
+					<div class="text-center">
+						<a asp-action="Edit" asp-route-seqId="@item.SeqId">Edit</a> |
+						<a asp-action="Details" asp-route-seqId="@item.SeqId">Details</a> |
+						<a asp-action="Delete" asp-route-seqId="@item.SeqId">Delete</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

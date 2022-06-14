@@ -1,0 +1,58 @@
+﻿@using  HemsTask.Model.Models
+@model HemsTask.Model.Models.ProductType
+
+@{
+	ViewData["Title"] = "create";
+}
+
+<h1>Create</h1>
+
+<h4>Product type</h4>
+
+<hr />
+
+<form action="/ProductTypes/Create" method="Post">
+	<div class="row">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		<div class="form-group col-md-3">
+			<label asp-for="ProductTypeCode" class="control-label">Product type code</label>
+			<input asp-for="ProductTypeCode" class="form-control" />
+			<span asp-validation-for="ProductTypeCode" class="text-danger"></span>
+		</div>
+
+		<div class="form-group col-md-3">
+			<label asp-for="TypeName" class="control-label">Type name</label>
+			<input asp-for="TypeName" class="form-control" />
+			<span asp-validation-for="TypeName" class="text-danger"></span>
+		</div>
+
+		<div class="form-group col-md-3">
+			<label asp-for="Status" class="control-label"></label>
+			<select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<ProductTypeStatuses>()"></select>
+		</div>
+
+		<div class="form-group col-md-3">
+			<label asp-for="ProductCategorySeqId" class="control-label"></label>
+			<select asp-for="ProductCategorySeqId" class="form-control" asp-items="ViewBag.ProductCategories"></select>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label asp-for="TypeDescription" class="control-label">Type description</label>
+			<textarea asp-for="TypeDescription" class="form-control"></textarea>
+			<span asp-validation-for="TypeDescription" class="text-danger"></span>
+		</div>
+	</div>
+
+	<div class="form-group text-center">
+		<input type="button" value="Create" class="btn btn-primary btn-submit" />
+	</div>
+</form>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

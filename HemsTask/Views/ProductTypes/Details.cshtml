@@ -1,0 +1,50 @@
+﻿@model HemsTask.Model.Models.ProductType
+
+@{
+    ViewData["Title"] = "details";
+}
+
+<h1>Details</h1>
+
+<div>
+	<h4>Product type</h4>
+
+	<hr />
+
+	<dl class="row">
+		<dt class="col-sm-2">
+			Type code
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.ProductTypeCode)
+		</dd>
+		<dt class="col-sm-2">
+			Category code
+		</dt>
+		<dd class="col-sm-10">
+			<span class="badge badge-info">@Html.DisplayFor(model => model.ProductCategoryCode)</span>
+		</dd>
+		<dt class="col-sm-2">
+			Type name
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.TypeName)
+		</dd>
+		<dt class="col-sm-2">
+			Type description
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.TypeDescription)
+		</dd>
+		<dt class="col-sm-2">
+			Type status
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Status)
+		</dd>
+	</dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-seqId="@Model.SeqId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

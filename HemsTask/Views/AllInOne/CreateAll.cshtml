@@ -1,0 +1,190 @@
+﻿@using  HemsTask.Model.Models
+@model HemsTask.Model.Models.AllInOne
+
+@{
+	ViewData["Title"] = "create all";
+}
+
+<h1>Create</h1>
+
+<h4>Category - Type - Product</h4>
+
+<hr />
+
+<div class="text-right">
+	<input type="button" value="Add category" class="btn btn-success toggle-category-form-visbility" />
+</div>
+
+<div id="createCategory" class="d-none mt-3">
+	<h2 class="text-center mb-3">Categories</h2>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Code
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Description
+				</th>
+				<th>
+					Status
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in ViewBag.ProductCategoriesList as ICollection<ProductCategory>)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.ProductCategoryCode)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.CategoryName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.CategoryDescription)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Status)
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<form action="/ProductCategories/Create" method="Post">
+		<h2 class="text-center mb-3">Create new category</h2>
+
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<div class="form-group col-md-4">
+				<label asp-for="Category.ProductCategoryCode" class="control-label">Product category code</label>
+				<input asp-for="Category.ProductCategoryCode" class="form-control" />
+				<span asp-validation-for="Category.ProductCategoryCode" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label asp-for="Category.CategoryName" class="control-label">Category name</label>
+				<input asp-for="Category.CategoryName" class="form-control" />
+				<span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label asp-for="Category.Status" class="control-label"></label>
+				<select asp-for="Category.Status" class="form-control" asp-items="Html.GetEnumSelectList<ProductCategoryStatuses>()"></select>
+			</div>
+
+			<div class="form-group col-md-12">
+				<label asp-for="Category.CategoryDescription" class="control-label">Category description</label>
+				<textarea asp-for="Category.CategoryDescription" class="form-control"></textarea>
+				<span asp-validation-for="Category.CategoryDescription" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="form-group text-center">
+			<input type="button" value="Create category" class="btn btn-primary btn-cus-submit" />
+			<input type="button" value="Add type" class="btn btn-success toggle-type-form-visbility" />
+		</div>
+	</form>
+
+	<hr />
+
+	<div id="createType" class="d-none container">
+		<form action="/ProductTypes/Create" method="Post">
+			<h2 class="text-center mb-3">Create new type</h2>
+
+			<div class="row">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+				<div class="form-group col-md-3">
+					<label asp-for="Type.ProductCategorySeqId" class="control-label">Product category</label>
+					<select asp-for="Type.ProductCategorySeqId" class="form-control" asp-items="ViewBag.ProductCategories"></select>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label asp-for="Type.ProductTypeCode" class="control-label">Product type code</label>
+					<input asp-for="Type.ProductTypeCode" class="form-control" />
+					<span asp-validation-for="Type.ProductTypeCode" class="text-danger"></span>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label asp-for="Type.TypeName" class="control-label">Type name</label>
+					<input asp-for="Type.TypeName" class="form-control" />
+					<span asp-validation-for="Type.TypeName" class="text-danger"></span>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label asp-for="Type.Status" class="control-label"></label>
+					<select asp-for="Type.Status" class="form-control" asp-items="Html.GetEnumSelectList<ProductTypeStatuses>()"></select>
+				</div>
+
+				<div class="form-group col-md-12">
+					<label asp-for="Type.TypeDescription" class="control-label">Type description</label>
+					<textarea asp-for="Type.TypeDescription" class="form-control"></textarea>
+					<span asp-validation-for="Type.TypeDescription" class="text-danger"></span>
+				</div>
+			</div>
+
+			<div class="form-group text-center">
+				<input type="button" value="Create type" class="btn btn-primary btn-cus-submit" />
+				<input type="button" value="Add product" class="btn btn-success toggle-product-form-visbility" />
+			</div>
+		</form>
+
+		<hr />
+
+		<div id="createProduct" class="d-none container">
+			<form  action="/Products/Create" method="Post">
+				<h2 class="text-center mb-3">Create new product</h2>
+
+				<div class="row">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+					<div class="form-group col-md-3">
+						<label asp-for="Product.ProductTypeSeqId" class="control-label">Product type</label>
+						<select asp-for="Product.ProductTypeSeqId" class="form-control" asp-items="ViewBag.ProductTypes"></select>
+					</div>
+
+					<div class="form-group col-md-3">
+						<label asp-for="Product.ProductCode" class="control-label">Product code</label>
+						<input asp-for="Product.ProductCode" class="form-control" />
+						<span asp-validation-for="Product.ProductCode" class="text-danger"></span>
+					</div>
+
+					<div class="form-group col-md-3">
+						<label asp-for="Product.ProductName" class="control-label">Product name</label>
+						<input asp-for="Product.ProductName" class="form-control" />
+						<span asp-validation-for="Product.ProductName" class="text-danger"></span>
+					</div>
+
+					<div class="form-group col-md-3">
+						<label asp-for="Product.Status" class="control-label"></label>
+						<select asp-for="Product.Status" class="form-control" asp-items="Html.GetEnumSelectList<ProductStatuses>()"></select>
+					</div>
+
+					<div class="form-group col-md-12">
+						<label asp-for="Product.ProductDescription" class="control-label">Product description</label>
+						<textarea asp-for="Product.ProductDescription" class="form-control"></textarea>
+						<span asp-validation-for="Product.ProductDescription" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="form-group text-center">
+					<input type="button" value="Create product" class="btn btn-primary btn-cus-submit" />
+				</div>
+
+				<hr />
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script src="~/js/create-all.js"></script>
+}
